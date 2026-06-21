@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九游娱乐 · 你的轻量随身站点</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', Helvetica, Arial, sans-serif;
+            background: linear-gradient(145deg, #ffe6c7 0%, #ffd9b0 40%, #fbc29e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #2e241e;
+            line-height: 1.6;
+            padding: 1.2rem;
+        }
+
+        /* 主容器 — 白卡片质感 */
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            background: rgba(255, 250, 240, 0.75);
+            backdrop-filter: blur(2px);
+            border-radius: 40px;
+            box-shadow: 0 20px 40px -12px rgba(140, 80, 30, 0.25);
+            padding: 1.8rem 2.2rem 2.8rem;
+            transition: box-shadow 0.2s;
+        }
+
+        /* 导航区 — 轻量标签感 */
+        .top-nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem 0.5rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 2px dashed rgba(200, 140, 90, 0.25);
+            margin-bottom: 2.2rem;
+        }
+
+        .brand {
+            font-weight: 600;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            background: #fff1e0;
+            padding: 0.2rem 1.2rem;
+            border-radius: 60px;
+            box-shadow: 0 2px 6px rgba(180, 100, 40, 0.10);
+            color: #6b3f1f;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.5rem;
+            align-items: center;
+        }
+
+        .nav-links span {
+            font-size: 0.95rem;
+            color: #5f4030;
+            background: transparent;
+            padding: 0.15rem 0.3rem;
+            border-radius: 30px;
+            transition: 0.15s;
+            cursor: default;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #6f4a32;
+            font-weight: 500;
+            background: #fff6ed;
+            padding: 0.25rem 1rem;
+            border-radius: 60px;
+            border: 1px solid transparent;
+            transition: 0.2s;
+            font-size: 0.95rem;
+            box-shadow: 0 1px 4px rgba(130, 70, 30, 0.06);
+        }
+
+        .nav-links a:hover {
+            background: #ffffff;
+            border-color: #d9ad85;
+            box-shadow: 0 4px 8px rgba(160, 90, 40, 0.12);
+            color: #3f281a;
+        }
+
+        /* hero 摘要 */
+        .hero-note {
+            background: rgba(255, 243, 230, 0.6);
+            border-radius: 28px;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2.8rem;
+            box-shadow: inset 0 1px 4px rgba(255, 238, 220, 0.8), 0 6px 12px -8px rgba(100, 60, 20, 0.15);
+        }
+
+        .hero-note h2 {
+            font-size: 1.8rem;
+            font-weight: 580;
+            letter-spacing: -0.01em;
+            color: #3f2a1a;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.3rem 0.8rem;
+        }
+
+        .hero-note .highlight {
+            background: #dbaa7c;
+            color: #241a12;
+            padding: 0.1rem 1rem;
+            border-radius: 60px;
+            font-weight: 580;
+            font-size: 1.5rem;
+            display: inline-block;
+        }
+
+        .hero-desc {
+            margin-top: 1rem;
+            font-size: 1.05rem;
+            color: #4b3323;
+            max-width: 750px;
+        }
+
+        .hero-desc a {
+            color: #653f28;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid #e2b48e;
+            transition: 0.15s;
+        }
+
+        .hero-desc a:hover {
+            background: #eacfb4;
+            border-bottom-color: #966a45;
+        }
+
+        /* 三场景卡片 */
+        .scene-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.6rem;
+            margin: 2.4rem 0 2.6rem;
+        }
+
+        .scene-card {
+            background: white;
+            padding: 1.8rem 1.5rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 8px 20px -8px rgba(140, 80, 30, 0.15);
+            transition: 0.2s ease;
+            border: 1px solid rgba(240, 210, 180, 0.3);
+        }
+
+        .scene-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 24px -12px rgba(130, 65, 20, 0.2);
+            border-color: #e1ba9a;
+        }
+
+        .scene-card .emoji-badge {
+            font-size: 1.8rem;
+            display: inline-block;
+            background: #fceadc;
+            padding: 0.2rem 0.9rem;
+            border-radius: 60px;
+            margin-bottom: 0.8rem;
+        }
+
+        .scene-card h3 {
+            font-size: 1.3rem;
+            font-weight: 560;
+            color: #3f2a1c;
+            margin-bottom: 0.6rem;
+        }
+
+        .scene-card p {
+            color: #4b382a;
+            font-size: 0.98rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .scene-card .footnote {
+            font-size: 0.9rem;
+            color: #7a5f4a;
+            border-left: 4px solid #e0ba98;
+            padding-left: 0.8rem;
+            background: #fcf4ec;
+            border-radius: 0 12px 12px 0;
+            margin-top: 0.3rem;
+        }
+
+        /* 常见说明 — 类似faq摘要 */
+        .faq-section {
+            background: #fcf3e9;
+            border-radius: 30px;
+            padding: 1.8rem 2rem;
+            margin: 2.4rem 0 1.8rem;
+            box-shadow: inset 0 0 0 1px rgba(235, 195, 160, 0.3);
+        }
+
+        .faq-section h3 {
+            font-weight: 580;
+            font-size: 1.3rem;
+            color: #3d2a1b;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed #dfc5ae;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 550;
+            color: #3a261b;
+            font-size: 1rem;
+        }
+
+        .faq-a {
+            color: #5b4130;
+            font-size: 0.95rem;
+            padding-left: 0.3rem;
+        }
+
+        .faq-a a {
+            color: #6f452b;
+            text-decoration: none;
+            border-bottom: 1px solid #d4ad8a;
+            font-weight: 500;
+        }
+
+        .faq-a a:hover {
+            background: #eddccb;
+        }
+
+        /* 收藏提示 */
+        .bookmark-tip {
+            background: #fff2e4;
+            border-radius: 60px;
+            padding: 0.6rem 2rem 0.6rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            margin-top: 0.6rem;
+            font-size: 0.95rem;
+            border: 1px solid #e7cbb2;
+        }
+
+        .bookmark-tip span {
+            background: #d7aa85;
+            color: #1f150e;
+            padding: 0.05rem 1rem;
+            border-radius: 60px;
+            font-weight: 500;
+        }
+
+        /* footer */
+        .page-footer {
+            margin-top: 2.8rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #6d5542;
+            border-top: 1px solid #e6cfba;
+            padding-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem 1.8rem;
+        }
+
+        .page-footer a {
+            color: #5d3f2b;
+            text-decoration: none;
+            border-bottom: 1px solid #dbb79a;
+        }
+
+        .page-footer a:hover {
+            color: #2f1f13;
+        }
+
+        /* 响应式 */
+        @media (max-width: 820px) {
+            .wrapper {
+                padding: 1.2rem 1.2rem 2rem;
+            }
+            .scene-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .hero-note h2 {
+                font-size: 1.5rem;
+            }
+            .top-nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .nav-links {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-note {
+                padding: 1.5rem 1.2rem;
+            }
+            .faq-section {
+                padding: 1.5rem 1rem;
+            }
+            .brand {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <!-- 轻量导航 -->
+    <div class="top-nav">
+        <div class="brand">◈ 九游 · 随行</div>
+        <div class="nav-links">
+            <span>📌 已收藏</span>
+            <span>🔄 再次访问</span>
+            <a href="https://official--jiuyou.com">九游娱乐</a>
+            <span>📋 场景</span>
+            <span>💬 说明</span>
+        </div>
+    </div>
+
+    <!-- hero / 再次访问 & 收藏 -->
+    <div class="hero-note">
+        <h2>
+            <span class="highlight">📂 再次回来</span>
+            <span style="font-weight: 400; font-size: 1.3rem;">就像打开熟悉的角落</span>
+        </h2>
+        <div class="hero-desc">
+            有些站点值得放入收藏夹，每次重新找到都不需要思考。<a href="https://official--jiuyou.com">九游娱乐</a> 就是我们一直保留的那个标签页——没有花哨的跳转，只有干净的内容和持续的陪伴。无论你上次离开是几天前还是更久，再次访问时界面依然亲和，信息依然有条理。
+        </div>
+        <div class="bookmark-tip">
+            <span>⭐ 收藏提示</span>
+            把链接加入浏览器书签，或直接记住 <strong> official--jiuyou.com</strong>，下次回来不迷路。
+        </div>
+    </div>
+
+    <!-- 三个场景模块：从再次访问、收藏与关注的角度 -->
+    <div class="scene-grid">
+        <div class="scene-card">
+            <div class="emoji-badge">🔄</div>
+            <h3>再次访问 · 不陌生</h3>
+            <p>不必每次都从头摸索。导航记忆、布局延续，连背景色都保留了你上次喜欢的暖意。直接进入熟悉的板块，或者看看有什么新内容。</p>
+            <div class="footnote">✔ 页面结构稳定，减少重复认知</div>
+        </div>
+        <div class="scene-card">
+            <div class="emoji-badge">🔖</div>
+            <h3>收藏 · 不丢失</h3>
+            <p>把链接收进书签文件夹，或者添加到手机主屏幕。无论设备怎么换，<strong>九游娱乐</strong> 始终是一个轻量入口，不依赖临时会话。</p>
+            <div class="footnote">✔ 跨设备访问，不变的白名单</div>
+        </div>
+        <div class="scene-card">
+            <div class="emoji-badge">👀</div>
+            <h3>持续关注 · 不打扰</h3>
+            <p>没有频繁推送，也没有过度强调更新。你按自己的节奏回来看看，页面永远保持温和的节奏。关注，但不必时刻在线。</p>
+            <div class="footnote">✔ 内容克制，体验连贯</div>
+        </div>
+    </div>
+
+    <!-- 常见说明（FAQ 摘要） -->
+    <div class="faq-section">
+        <h3>📖 常见说明 · 几句就能讲清楚</h3>
+        <div class="faq-item">
+            <span class="faq-q">▸ 这个站点主要做什么？</span>
+            <span class="faq-a"><a href="https://official--jiuyou.com">九游娱乐</a> 保持轻量的信息呈现，不堆砌复杂功能。你可以理解为一块安静的网络角落，适合日常浏览与内容查找。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">▸ 怎样能快速回来？</span>
+            <span class="faq-a">直接收藏此页，或记住域名 official--jiuyou.com。不需要额外注册或关注社交媒体，打开即用。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">▸ 内容会频繁变化吗？</span>
+            <span class="faq-a">不会。页面侧重稳定与实用，偶尔调整结构但始终保留导航、场景与说明模块，让你每次回来都找得到重点。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">▸ 移动端体验如何？</span>
+            <span class="faq-a">完全自适应，卡片布局与圆角按钮在手机上同样舒适。你可以像在电脑上一样浏览。</span>
+        </div>
+    </div>
+
+    <!-- 一句关于持续关注的收尾 -->
+    <div style="margin: 1.8rem 0 1rem; font-size: 1rem; color: #4f3827; background: #fdf3e8; padding: 0.8rem 1.5rem; border-radius: 60px; display: inline-block; box-shadow: 0 2px 6px rgba(140, 70, 20, 0.05);">
+        📌 收藏 · 再次访问 · 持续关注 —— 不用记住太多，只要记得 <a href="https://official--jiuyou.com" style="color:#5d3c26;font-weight:600;text-decoration:none;border-bottom:2px solid #dbb18b;">九游娱乐</a> 就好。
+    </div>
+
+    <!-- footer -->
+    <div class="page-footer">
+        <span>轻量导航式 · 暖色渐变</span>
+        <span>📋 页面版本 2025</span>
+        <a href="https://official--jiuyou.com">九游娱乐</a>
+        <span>每次回来都熟悉</span>
+    </div>
+</div>
+</body>
+</html>
